@@ -1,0 +1,24 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: cerebro-app
+  labels:
+    app: cerebro
+spec:
+  containers:
+    - name: cerebro-app
+      image: lmenezes/cerebro:0.8.5
+      # args:
+      #   - "-Dhttp.address=127.0.0.1"
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: cerebro-service
+spec:
+  selector:
+    app: cerebro
+  ports:
+    - port: 9000 # Default port for image

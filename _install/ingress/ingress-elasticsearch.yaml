@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: elasticsearch-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: elasticsearch.localhost.com
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: elasticsearch-master-headless
+            servicePort: 9200
+            
+  - host: cerebro.localhost.com
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: cerebro-service
+            servicePort: 9000
+  - host: kibana.localhost.com
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: ka-kibana
+            servicePort: 5601
